@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Makes the app display properly on phones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HikeBuddy</title>
+
+    <!-- Connects our CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <img src="images/icon-192.png" alt="HikeBuddy logo" class="site-logo">
+        <h1>HikeBuddy</h1>
+        <p>Discover and explore hiking routes across Scotland.</p>
+    </header>
+
+
+    <!-- Main content -->
+    <main>
+
+        <!-- Welcome section -->
+        <section class="welcome">
+            <h2>Find your next hike</h2>
+            <p>
+                Explore beautiful hiking routes across Scotland.
+            </p>
+        </section>
+
+
+        <!-- Recommended hikes -->
+        <section class="recommended">
+
+            <div class="section-heading">
+                <h2>Recommended hikes</h2>
+                <a href="explore.html">See all</a>
+            </div>
+
+
+            <!-- Hike 1 -->
+            <article class="hike-card" onclick="openHike('arthurs-seat')">
+
+                <div class="hike-image">
+                    <img src="images/arthurs-seat.jpg" alt="Arthur's Seat in Edinburgh">
+                </div>
+
+                <div class="hike-info">
+                    <h3>Arthur's Seat</h3>
+                    <p>Edinburgh, Scotland</p>
+
+                    <div class="hike-details">
+                        <span>5 km</span>
+                        <span>2 hrs</span>
+                        <span>Easy</span>
+                    </div>
+                </div>
+
+            </article>
+
+
+            <!-- Hike 2 -->
+            <article class="hike-card" onclick="openHike('ben-lomond')">
+
+                <div class="hike-image">
+                    <img src="images/ben-lomond.jpg" alt="Ben Lomond in Scotland">
+                </div>
+
+                <div class="hike-info">
+                    <h3>Ben Lomond</h3>
+                    <p>Loch Lomond, Scotland</p>
+
+                    <div class="hike-details">
+                        <span>12 km</span>
+                        <span>5 hrs</span>
+                        <span>Hard</span>
+                    </div>
+                </div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <!-- Bottom navigation -->
+    <nav class="bottom-nav">
+
+        <a href="#" class="active">
+            Home
+        </a>
+
+        <a href="explore.html">
+            Explore
+        </a>
+
+        <a href="favourites.html">
+            Favourites
+        </a>
+
+    </nav>
+
+
+    <!-- Connects our JavaScript file -->
+    <script src="app.js"></script>
+
+</body>
+</html>

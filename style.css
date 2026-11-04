@@ -1,0 +1,361 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f5ef;
+    color: #26352d;
+    padding-bottom: 100px;
+}
+
+/* Header */
+.header {
+    background-color: #315b45;
+    color: white;
+    padding: 24px 20px;
+}
+
+.header h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Main content */
+main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Welcome section */
+.welcome {
+    margin-bottom: 28px;
+}
+
+.welcome h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #68736d;
+    line-height: 1.5;
+}
+
+/* Section heading */
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.section-heading h2 {
+    font-size: 20px;
+}
+
+.section-heading a {
+    color: #315b45;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Hike cards */
+.hike-card {
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.hike-image {
+    height: 170px;
+    background-color: #c9d5ca;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #315b45;
+    font-size: 14px;
+}
+
+.hike-info {
+    padding: 16px;
+}
+
+.hike-info h3 {
+    font-size: 19px;
+    margin-bottom: 5px;
+}
+
+.hike-info p {
+    color: #68736d;
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+.hike-details {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.hike-details span {
+    background-color: #eef2ed;
+    color: #315b45;
+    padding: 6px 9px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+/* Bottom navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background-color: white;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 9999;
+}
+
+.bottom-nav a {
+    color: #68736d;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.bottom-nav a.active {
+    color: #315b45;
+}
+/* Back button */
+.back-button {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #315b45;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* Hike details */
+.details-card {
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.details-image {
+    height: 150px;
+    background-color: #c9d5ca;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #315b45;
+}
+.details-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.details-info {
+    padding: 20px;
+    padding-bottom: 150px;
+}
+
+.details-info h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.location {
+    color: #68736d;
+    margin-bottom: 18px;
+}
+
+.details-info h3 {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.details-info p {
+    color: #68736d;
+    line-height: 1.6;
+}
+
+
+/* Buttons */
+.favourite-button,
+.map-button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.favourite-button {
+    background-color: #eef2ed;
+    color: #315b45;
+    border: 1px solid #315b45;
+}
+
+.map-button {
+    background-color: #315b45;
+    color: white;
+    border: none;
+}
+
+.location-button {
+    display: inline-block;
+    width: auto;
+    padding: 9px 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #eef2ed;
+    color: #315b45;
+    border: 1px solid #315b45;
+}
+
+.empty-favourites {
+    background-color: white;
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.empty-favourites h3 {
+    margin-bottom: 8px;
+}
+
+.empty-favourites p {
+    color: #68736d;
+    line-height: 1.5;
+}
+.search-box {
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d5ddd6;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: #315b45;
+}
+.search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.search-box select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d5ddd6;
+    border-radius: 12px;
+    font-size: 15px;
+    background-color: white;
+    color: #26352d;
+}
+.weather-section {
+    background-color: white;
+    border-radius: 16px;
+    padding: 18px;
+    margin-top: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.weather-section h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.weather-section p {
+    color: #68736d;
+    line-height: 1.5;
+}
+#map {
+    height: 300px;
+    width: 100%;
+    margin-top: 18px;
+    margin-bottom: 30px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.bottom-nav {
+    z-index: 10000;
+}
+.hike-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.no-results {
+    display: none;
+    background-color: white;
+    border-radius: 16px;
+    padding: 25px 20px;
+    text-align: center;
+    color: #68736d;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+#favourites-list .hike-card {
+    overflow: hidden;
+}
+
+#favourites-list .hike-card .hike-image {
+    height: 170px !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+#favourites-list .hike-card .hike-image img {
+    width: 100% !important;
+    height: 170px !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+.site-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 10px;
+}

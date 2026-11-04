@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hike Details - HikeBuddy</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Hike Details</h1>
+        <p>Explore your next adventure</p>
+    </header>
+
+
+    <main>
+
+        <a href="#" class="back-button" id="back-button">← Back to hikes</a>
+
+
+        <section class="details-card">
+
+            <div class="details-image">
+                <img id="hike-image" src="" alt="">
+            </div>
+
+
+            <div class="details-info">
+
+                <h2 id="hike-name">Arthur's Seat</h2>
+
+                <p class="location" id="hike-location">
+                    Edinburgh, Scotland
+                </p>
+
+                <div class="hike-details">
+
+                    <span id="hike-distance">5 km</span>
+                    <span id="hike-duration">2 hrs</span>
+                    <span id="hike-difficulty">Easy</span>
+
+                </div>
+
+
+                <h3>About this hike</h3>
+
+                <p id="hike-description"></p>
+
+
+                <button class="favourite-button" id="favourite-button" onclick="toggleFavourite()">
+                    ♡ Add to favourites
+                </button>
+
+
+                <button class="map-button">
+                    View map
+                </button>
+                
+                <button class="location-button" onclick="useMyLocation()">
+                    Use my location
+                </button>
+                
+                <div id="map"></div>
+
+            <section class="weather-section">
+             <h3>Current Weather</h3>
+            <p id="weather-info">Weather information will appear here.</p>
+             </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <nav class="bottom-nav">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="explore.html">
+            Explore
+        </a>
+    
+        <a href="favourites.html">
+            Favourites
+        </a>
+    
+
+    </nav>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+    const params = new URLSearchParams(window.location.search);
+const hikeId = params.get("hike");
+
+const backButton = document.getElementById("back-button");
+
+const fromPage = params.get("from");
+
+if (fromPage === "explore") {
+    backButton.href = "explore.html";
+} else if (fromPage === "favourites") {
+    backButton.href = "favourites.html";
+} else {
+    backButton.href = "index.html";
+}
+    
+
+
+    const hikes = {
+        "arthurs-seat": {
+            name: "Arthur's Seat",
+            image: "images/arthurs-seat.jpg",
+            location: "Edinburgh, Scotland",
+            city: "Edinburgh",
+            distance: "5 km",
+            duration: "2 hrs",
+            difficulty: "Easy",
+            description: "A popular hill walk in Edinburgh with beautiful views across the city and surrounding area."
+        },
+
+        "ben-lomond": {
+            name: "Ben Lomond",
+            image: "images/ben-lomond.jpg",
+            location: "Loch Lomond, Scotland",
+            city: "Balloch",
+            distance: "12 km",
+            duration: "5 hrs",
+            difficulty: "Hard",
+            description: "A challenging mountain hike with impressive views over Loch Lomond and the surrounding landscape."
+        },
+
+        "the-hermitage": {
+            name: "The Hermitage",
+            image: "images/the-hermitage.jpg",
+            location: "Dunkeld, Scotland",
+            city: "Dunkeld",
+            distance: "4 km",
+            duration: "1.5 hrs",
+            difficulty: "Easy",
+            description: "A peaceful woodland walk near Dunkeld, surrounded by trees, waterfalls and scenic countryside."
+        },
+
+        "loch-an-eilein": {
+            name: "Loch an Eilein",
+            image: "images/loch-an-eilein.jpg",
+            location: "Cairngorms, Scotland",
+            city: "Aviemore",
+            distance: "7 km",
+            duration: "2 hrs",
+            difficulty: "Moderate",
+            description: "A scenic route around a beautiful loch in the Cairngorms, with woodland scenery and views of the historic island castle."
+        },
+
+        "cairn-gorm": {
+            name: "Cairn Gorm",
+            image: "images/cairn-gorm.jpg",
+            location: "Cairngorms, Scotland",
+            city: "Aviemore",
+            distance: "10 km",
+            duration: "4 hrs",
+            difficulty: "Hard",
+            description: "A challenging mountain route in the Cairngorms with dramatic scenery and high-altitude views."
+        }
+    };
+
+    const selectedHike = hikes[hikeId];
+
+    if (selectedHike) {
+        document.getElementById("hike-name").textContent = selectedHike.name;
+        document.getElementById("hike-image").src = selectedHike.image;
+        document.getElementById("hike-image").alt = selectedHike.name;
+        document.getElementById("hike-location").textContent = selectedHike.location;
+        document.getElementById("hike-distance").textContent = selectedHike.distance;
+        document.getElementById("hike-duration").textContent = selectedHike.duration;
+        document.getElementById("hike-difficulty").textContent = selectedHike.difficulty;
+        document.getElementById("hike-description").textContent = selectedHike.description;
+    }
+
+    let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+
+    const favouriteButton = document.getElementById("favourite-button");
+
+    if (favourites.includes(hikeId)) {
+        favouriteButton.textContent = "♥ Saved to favourites";
+    }
+
+    function toggleFavourite() {
+        let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+
+        if (favourites.includes(hikeId)) {
+            favourites = favourites.filter(item => item !== hikeId);
+            favouriteButton.textContent = "♡ Add to favourites";
+        } else {
+            favourites.push(hikeId);
+            favouriteButton.textContent = "♥ Saved to favourites";
+        }
+
+        localStorage.setItem("favourites", JSON.stringify(favourites));
+    }
+    const weatherInfo = document.getElementById("weather-info");
+
+const API_KEY = "YOUR_API_KEY_HERE";
+
+async function getWeather() {
+    if (!selectedHike) {
+        return;
+    }
+
+    weatherInfo.textContent = "Loading weather...";
+
+    try {
+        const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${selectedHike.city},UK&units=metric&appid=${API_KEY}`
+        );
+
+        if (!response.ok) {
+            throw new Error("Weather request failed");
+        }
+
+        const weather = await response.json();
+
+        weatherInfo.textContent =
+            `${Math.round(weather.main.temp)}°C · ${weather.weather[0].description} · Wind ${Math.round(weather.wind.speed * 3.6)} km/h`;
+
+    } catch (error) {
+        weatherInfo.textContent =
+            "Weather information is currently unavailable.";
+    }
+}
+
+getWeather();
+const hikeCoordinates = {
+        "arthurs-seat": [55.9447, -3.1618],
+        "ben-lomond": [56.2375, -4.6336],
+        "the-hermitage": [56.5658, -3.5850],
+        "loch-an-eilein": [57.1458, -3.5858],
+        "cairn-gorm": [57.1167, -3.6167]
+    };
+
+    const coordinates = hikeCoordinates[hikeId];
+
+      let map;
+
+     if (coordinates) {
+    map = L.map("map").setView(coordinates, 13);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker(coordinates)
+            .addTo(map)
+            .bindPopup(selectedHike.name)
+            .openPopup();
+    }
+
+    function useMyLocation() {
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return;
+    }
+
+    if (!map) {
+        alert("The map is not available.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            map.setView([latitude, longitude], 14);
+
+            L.marker([latitude, longitude])
+                .addTo(map)
+                .bindPopup("You are here")
+                .openPopup();
+        },
+        function() {
+    alert("Location access was unavailable. Please check your browser permissions.");
+}
+    );
+}
+    </script>
+    
+    </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Favourites - HikeBuddy</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Favourites</h1>
+        <p>Your saved hiking routes</p>
+    </header>
+
+
+    <main>
+
+        <section class="welcome">
+            <h2>Saved hikes</h2>
+            <p>Keep your favourite Scottish adventures in one place.</p>
+        </section>
+
+
+        <section id="favourites-list"></section>
+
+    </main>
+
+
+    <nav class="bottom-nav">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="explore.html">
+            Explore
+        </a>
+
+        <a href="favourites.html" class="active">
+            Favourites
+        </a>
+
+    </nav>
+
+
+    <script>
+
+        const favourites = JSON.parse(
+            localStorage.getItem("favourites")
+        ) || [];
+
+        const list = document.getElementById("favourites-list");
+
+
+        if (favourites.length === 0) {
+
+            list.innerHTML = `
+                <div class="empty-favourites">
+                    <h3>No saved hikes yet</h3>
+                    <p>
+                        Explore some hikes and save your favourites
+                        to see them here.
+                    </p>
+                </div>
+            `;
+
+        } else {
+
+            favourites.forEach(function(hike) {
+
+                if (hike === "arthurs-seat") {
+
+                    list.innerHTML += `
+                        <article class="hike-card"
+                        onclick="window.location.href='hike-details.html?hike=arthurs-seat&from=favourites'"
+
+                            <div class="hike-image">
+                           <img src="images/arthurs-seat.jpg" alt="Arthur's Seat in Edinburgh">
+                            </div>
+
+                            <div class="hike-info">
+                                <h3>Arthur's Seat</h3>
+                                <p>Edinburgh, Scotland</p>
+
+                                <div class="hike-details">
+                                    <span>5 km</span>
+                                    <span>2 hrs</span>
+                                    <span>Easy</span>
+                                </div>
+                            </div>
+
+                        </article>
+                    `;
+                }
+
+
+                if (hike === "ben-lomond") {
+
+                    list.innerHTML += `
+                        <article class="hike-card"
+                        onclick="window.location.href='hike-details.html?hike=ben-lomond&from=favourites'"
+
+                            <div class="hike-image">
+                            <img src="images/ben-lomond.jpg" alt="Ben Lomond in Scotland">
+                            </div>
+
+                            <div class="hike-info">
+                                <h3>Ben Lomond</h3>
+                                <p>Loch Lomond, Scotland</p>
+
+                                <div class="hike-details">
+                                    <span>12 km</span>
+                                    <span>5 hrs</span>
+                                    <span>Hard</span>
+                                </div>
+                            </div>
+
+                        </article>
+                    `;
+                }
+
+            
+            if (hike === "the-hermitage") {
+
+list.innerHTML += `
+    <article class="hike-card"
+    onclick="window.location.href='hike-details.html?hike=the-hermitage&from=favourites'"
+
+        <div class="hike-image">
+        <img src="images/the-hermitage.jpg" alt="The Hermitage in Dunkeld">
+        </div>
+
+        <div class="hike-info">
+            <h3>The Hermitage</h3>
+            <p>Dunkeld, Scotland</p>
+
+            <div class="hike-details">
+                <span>4 km</span>
+                <span>1.5 hrs</span>
+                <span>Easy</span>
+            </div>
+        </div>
+
+    </article>
+`;
+}
+
+
+if (hike === "loch-an-eilein") {
+
+list.innerHTML += `
+    <article class="hike-card"
+    onclick="window.location.href='hike-details.html?hike=loch-an-eilein&from=favourites'"
+
+        <div class="hike-image">
+        <img src="images/loch-an-eilein.jpg" alt="Loch an Eilein in the Cairngorms">
+        </div>
+
+        <div class="hike-info">
+            <h3>Loch an Eilein</h3>
+            <p>Cairngorms, Scotland</p>
+
+            <div class="hike-details">
+                <span>7 km</span>
+                <span>2 hrs</span>
+                <span>Moderate</span>
+            </div>
+        </div>
+
+    </article>
+`;
+}
+
+
+if (hike === "cairn-gorm") {
+
+list.innerHTML += `
+    <article class="hike-card"
+    onclick="window.location.href='hike-details.html?hike=cairn-gorm&from=favourites'"
+
+        <div class="hike-image">
+        <img src="images/cairn-gorm.jpg" alt="Cairn Gorm in the Cairngorms">
+        </div>
+
+        <div class="hike-info">
+            <h3>Cairn Gorm</h3>
+            <p>Cairngorms, Scotland</p>
+
+            <div class="hike-details">
+                <span>10 km</span>
+                <span>4 hrs</span>
+                <span>Hard</span>
+            </div>
+        </div>
+
+    </article>
+`;
+}
+});
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore - HikeBuddy</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Explore</h1>
+        <p>Find a hike that suits you</p>
+    </header>
+
+
+    <main>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Search hikes..."
+            >
+        
+            <select id="difficulty-filter">
+                <option value="all">All difficulties</option>
+                <option value="easy">Easy</option>
+                <option value="moderate">Moderate</option>
+                <option value="hard">Hard</option>
+            </select>
+        
+        </div>
+
+
+        <section>
+
+            <div class="section-heading">
+                <h2>All hikes</h2>
+            </div>
+
+
+            <div id="hike-list">
+
+                <!-- Arthur's Seat -->
+                <article class="hike-card"
+                    onclick="openHike('arthurs-seat')">
+            
+                    <div class="hike-image">
+                        <img src="images/arthurs-seat.jpg" alt="Arthur's Seat in Edinburgh">
+                    </div>
+            
+                    <div class="hike-info">
+                        <h3>Arthur's Seat</h3>
+                        <p>Edinburgh, Scotland</p>
+            
+                        <div class="hike-details">
+                            <span>5 km</span>
+                            <span>2 hrs</span>
+                            <span>Easy</span>
+                        </div>
+                    </div>
+            
+                </article>
+            
+            
+                <!-- Ben Lomond -->
+                <article class="hike-card"
+                    onclick="openHike('ben-lomond')">
+            
+                    <div class="hike-image">
+                        <img src="images/ben-lomond.jpg" alt="Ben Lomond in Scotland">
+                    </div>
+            
+                    <div class="hike-info">
+                        <h3>Ben Lomond</h3>
+                        <p>Loch Lomond, Scotland</p>
+            
+                        <div class="hike-details">
+                            <span>12 km</span>
+                            <span>5 hrs</span>
+                            <span>Hard</span>
+                        </div>
+                    </div>
+            
+                </article>
+            
+            
+                <!-- The Hermitage -->
+                <article class="hike-card"
+                    onclick="openHike('the-hermitage')">
+            
+                    <div class="hike-image">
+                        <img src="images/the-hermitage.jpg" alt="The Hermitage in Dunkeld">
+                    </div>
+            
+                    <div class="hike-info">
+                        <h3>The Hermitage</h3>
+                        <p>Dunkeld, Scotland</p>
+            
+                        <div class="hike-details">
+                            <span>4 km</span>
+                            <span>1.5 hrs</span>
+                            <span>Easy</span>
+                        </div>
+                    </div>
+            
+                </article>
+            
+            
+                <!-- Loch an Eilein -->
+                <article class="hike-card"
+                    onclick="openHike('loch-an-eilein')">
+            
+                    <div class="hike-image">
+                        <img src="images/loch-an-eilein.jpg" alt="Loch an Eilein in the Cairngorms">
+                    </div>
+            
+                    <div class="hike-info">
+                        <h3>Loch an Eilein</h3>
+                        <p>Cairngorms, Scotland</p>
+            
+                        <div class="hike-details">
+                            <span>7 km</span>
+                            <span>2 hrs</span>
+                            <span>Moderate</span>
+                        </div>
+                    </div>
+            
+                </article>
+            
+            
+                                <!-- Cairn Gorm -->
+                                <article class="hike-card"
+                                onclick="openHike('cairn-gorm')">
+            
+                                <div class="hike-image">
+                                    <img src="images/cairn-gorm.jpg" alt="Cairn Gorm in the Cairngorms">
+                                </div>
+            
+                                <div class="hike-info">
+                                    <h3>Cairn Gorm</h3>
+                                    <p>Cairngorms, Scotland</p>
+            
+                                    <div class="hike-details">
+                                        <span>10 km</span>
+                                        <span>4 hrs</span>
+                                        <span>Hard</span>
+                                    </div>
+                                </div>
+            
+                            </article>
+            
+                        </div> <!-- closes hike-list -->
+            
+                        <p id="no-results" class="no-results">
+                            No hikes found. Try a different search or difficulty.
+                        </p>
+            
+                    </section>
+            
+                </main>
+
+    <nav class="bottom-nav">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="explore.html" class="active">
+            Explore
+        </a>
+
+        <a href="favourites.html">
+            Favourites
+        </a>
+
+    </nav>
+
+
+    <script src="app.js"></script>
+
+    <script>
+        const searchInput = document.getElementById("search-input");
+        const difficultyFilter = document.getElementById("difficulty-filter");
+        const hikeCards = document.querySelectorAll(".hike-card");
+        const noResults = document.getElementById("no-results");
+    
+        function filterHikes() {
+    
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            const selectedDifficulty = difficultyFilter.value;
+    
+            let visibleCount = 0;
+    
+            hikeCards.forEach(function(card) {
+    
+                const hikeName = card
+                    .querySelector("h3")
+                    .textContent
+                    .toLowerCase();
+    
+                const difficulty = card
+                    .querySelector(".hike-details span:last-child")
+                    .textContent
+                    .toLowerCase();
+    
+                const matchesSearch = hikeName.includes(searchTerm);
+    
+                const matchesDifficulty =
+                    selectedDifficulty === "all" ||
+                    difficulty === selectedDifficulty;
+    
+                if (matchesSearch && matchesDifficulty) {
+                    card.style.display = "";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+    
+            if (visibleCount === 0) {
+                noResults.style.display = "block";
+            } else {
+                noResults.style.display = "none";
+            }
+        }
+    
+        searchInput.addEventListener("input", filterHikes);
+    
+        difficultyFilter.addEventListener("change", filterHikes);
+    </script>
+</body>
+</html>
