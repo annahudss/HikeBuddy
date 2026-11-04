@@ -84,8 +84,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #315b45;
-    font-size: 14px;
+    overflow: hidden;
 }
 
 .hike-info {
