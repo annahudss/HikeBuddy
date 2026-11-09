@@ -208,8 +208,6 @@ if (fromPage === "explore") {
     }
     const weatherInfo = document.getElementById("weather-info");
 
-const API_KEY = "YOUR_API_KEY_HERE";
-
 async function getWeather() {
     if (!selectedHike) {
         return;
@@ -218,9 +216,11 @@ async function getWeather() {
     weatherInfo.textContent = "Loading weather...";
 
     try {
-        const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${selectedHike.city},UK&units=metric&appid=${API_KEY}`
-        );
+        
+const response = await fetch(
+    `https://hikebuddy-weather.teenageranna1302.workers.dev/?city=${encodeURIComponent(selectedHike.city + ",UK")}`
+);
+
 
         if (!response.ok) {
             throw new Error("Weather request failed");
