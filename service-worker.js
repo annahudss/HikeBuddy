@@ -1,4 +1,5 @@
-const CACHE_NAME = "hikebuddy-v6";
+
+const CACHE_NAME = "hikebuddy-v7";
 
 const FILES_TO_CACHE = [
     "index.html",
@@ -23,14 +24,64 @@ self.addEventListener("install", function(event) {
             .then(function(cache) {
                 return cache.addAll(FILES_TO_CACHE);
             })
+            .then(function() {
+                return self.skipWaiting();
+            })
+    );
+});
+
+self.addEventListener("activate", function(event) {
+    event.waitUntil(
+        caches.keys()
+            .then(function(cacheNames) {
+                return Promise.all(
+                    cacheNames
+                        .filter(function(name) {
+                            return name.startsWith("hikebuddy-") &&
+                                   name !== CACHE_NAME;
+                        })
+                        .map(function(name) {
+                            return caches.delete(name);
+                        })
+                );
+            })
+            .then(function() {
+                return self.clients.claim();
+            })
     );
 });
 
 self.addEventListener("fetch", function(event) {
-    event.respondWith(
-        caches.match(event.request, { ignoreSearch: true })
-            .then(function(response) {
-                return response || fetch(event.request);
-            })
-    );
+    const request = event.request;
+    const url = new URL(request.url);
+
+    if (request.method !== "GET") return;
+
+    // Always check online first for HTML pages.
+    if (request.mode === "navigate") {
+        event.respondWith(
+            fetch(request)
+                .then(function(response) {
+                    const copy = response.clone();
+                    caches.open(CACHE_NAME).then(function(cache) {
+                        cache.put(request, copy);
+                    });
+                    return response;
+                })
+                .catch(function() {
+                    return caches.match(request);
+                })
+        );
+        return;
+    }
+
+    // Keep cached local assets available offline.
+    if (url.origin === self.location.origin) {
+        event.respondWith(
+            caches.match(request)
+                .then(function(response) {
+                    return response || fetch(request);
+                })
+        );
+    }
 });
