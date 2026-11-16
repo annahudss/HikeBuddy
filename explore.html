@@ -191,49 +191,54 @@
         const hikeCards = document.querySelectorAll(".hike-card");
         const noResults = document.getElementById("no-results");
     
-        function filterHikes() {
-    
-            const searchTerm = searchInput.value.trim().toLowerCase();
-            const selectedDifficulty = difficultyFilter.value;
-    
-            let visibleCount = 0;
-    
-            hikeCards.forEach(function(card) {
-    
-                const hikeName = card
-                    .querySelector("h3")
-                    .textContent
-                    .toLowerCase();
-    
-                const difficulty = card
-                    .querySelector(".hike-details span:last-child")
-                    .textContent
-                    .toLowerCase();
-    
-                const matchesSearch = hikeName.includes(searchTerm);
-    
-                const matchesDifficulty =
-                    selectedDifficulty === "all" ||
-                    difficulty === selectedDifficulty;
-    
-                if (matchesSearch && matchesDifficulty) {
-                    card.style.display = "";
-                    visibleCount++;
-                } else {
-                    card.style.display = "none";
-                }
-            });
-    
-            if (visibleCount === 0) {
-                noResults.style.display = "block";
-            } else {
-                noResults.style.display = "none";
-            }
+        const distanceFilter = document.getElementById("distance-filter");
+
+function filterHikes() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    const selectedDifficulty = difficultyFilter.value;
+    const selectedDistance = distanceFilter.value;
+
+    let visibleCount = 0;
+
+    hikeCards.forEach(function(card) {
+        const hikeName = card.querySelector("h3").textContent.toLowerCase();
+
+        const difficulty = card.querySelector(
+            ".hike-details span:last-child"
+        ).textContent.toLowerCase();
+
+        const distanceText = card.querySelector(
+            ".hike-details span:first-child"
+        ).textContent;
+
+        const distance = parseFloat(distanceText);
+
+        const matchesSearch = hikeName.includes(searchTerm);
+
+        const matchesDifficulty =
+            selectedDifficulty === "all" ||
+            difficulty === selectedDifficulty;
+
+        const matchesDistance =
+            selectedDistance === "all" ||
+            (selectedDistance === "short" && distance < 5) ||
+            (selectedDistance === "medium" && distance >= 5 && distance < 10) ||
+            (selectedDistance === "long" && distance >= 10);
+
+        if (matchesSearch && matchesDifficulty && matchesDistance) {
+            card.style.display = "";
+            visibleCount++;
+        } else {
+            card.style.display = "none";
         }
-    
-        searchInput.addEventListener("input", filterHikes);
-    
-        difficultyFilter.addEventListener("change", filterHikes);
+    });
+
+    noResults.style.display = visibleCount === 0 ? "block" : "none";
+}
+
+searchInput.addEventListener("input", filterHikes);
+difficultyFilter.addEventListener("change", filterHikes);
+distanceFilter.addEventListener("change", filterHikes);
     </script>
 </body>
 </html>
