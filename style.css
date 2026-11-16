@@ -352,14 +352,6 @@ main {
     object-fit: cover !important;
     display: block !important;
 }
-.site-logo {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-    display: block;
-    margin-bottom: 10px;
-}
-
 /* Expanding favourite hike cards */
 
 .favourite-card {
