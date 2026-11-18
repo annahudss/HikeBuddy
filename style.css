@@ -335,148 +335,57 @@ main {
     line-height: 1.5;
     margin-top: 10px;
 }
-#favourites-list .hike-card {
+/* Favourites cards */
+#favourites-list .favourite-card {
     overflow: hidden;
-}
-
-#favourites-list .hike-card .hike-image {
-    height: 170px;
-    width: 100% !important;
-    overflow: hidden !important;
-}
-
-#favourites-list .hike-card .hike-image img {
-    width: 100% !important;
-    height: 170px;
-    max-width: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-}
-/* Expanding favourite hike cards */
-
-.favourite-card {
     display: block;
     color: inherit;
     text-decoration: none;
-    transition: box-shadow 0.4s ease, transform 0.4s ease;
+    transition: box-shadow 0.4s ease;
 }
 
-.favourite-card .hike-image {
-    height: 170px;
-    transition: height 0.45s ease;
-}
-
-.favourite-card .hike-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.favourite-card.is-expanded .hike-image {
-    height: 310px;
-}
-
-.favourite-card.is-expanded {
-    box-shadow: 0 7px 22px rgba(0, 0, 0, 0.14);
-}
-
-.favourite-card:focus-visible {
-    outline: 3px solid #315b45;
-    outline-offset: 3px;
-}
-
-@media (max-width: 600px) {
-    .favourite-card.is-expanded .hike-image {
-        height: 250px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .favourite-card,
-    .favourite-card .hike-image {
-        transition: none;
-    }
-}
-.favourite-card.is-expanded .hike-image {
-    height: 310px !important;
-}
-
-@media (max-width: 600px) {
-    #favourite-card.is-expanded .hike-image {
-        height: 250px;
-    }
-}
-.favourite-card .hike-image {
-    display: block;
-    overflow: hidden;
-}
-
-.favourite-card .hike-image img {
-    width: 100%;
-    height: 170px;
-    object-fit: cover;
-    display: block;
-}
-
-.favourite-card.is-expanded .hike-image img {
-    height: 310px;
-}
-
-@media (max-width: 600px) {
-    .favourite-card.is-expanded .hike-image img {
-        height: 250px;
-    }
-}
-#favourites-list .favourite-card.is-expanded .hike-image img {
-    height: 310px;
-}
-
-@media (max-width: 600px) {
-    #favourites-list .favourite-card.is-expanded .hike-image img {
-        height: 250px;
-    }
-}
+/* Normal image */
 #favourites-list .favourite-card .hike-image {
+    width: 100%;
+    height: 170px;
+    display: block;
     overflow: hidden;
+    transition: height 0.4s ease;
 }
 
 #favourites-list .favourite-card .hike-image img {
     width: 100%;
-    height: 100% !important;
+    height: 100%;
+    max-width: 100%;
     object-fit: cover;
     display: block;
 }
 
-#favourites-list .favourite-card.is-expanded .hike-image,
-#favourites-list .favourite-card.is-expanded .hike-image img {
-    height: 310px !important;
-}
-
-@media (max-width: 600px) {
-    #favourites-list .favourite-card.is-expanded .hike-image,
-    #favourites-list .favourite-card.is-expanded .hike-image img {
-        height: 250px !important;
-    }
-}
+/* Expanded card */
 #favourites-list .favourite-card.is-expanded .hike-image {
-    height: auto !important;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
+    height: 310px;
 }
 
-#favourites-list .favourite-card.is-expanded .hike-image img {
-    width: 100%;
-    height: 100% !important;
-    object-fit: cover;
-    display: block;
+#favourites-list .favourite-card.is-expanded {
+    box-shadow: 0 7px 22px rgba(0, 0, 0, 0.14);
 }
 
+/* Mobile */
 @media (max-width: 600px) {
     #favourites-list .favourite-card.is-expanded .hike-image {
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        height: auto !important;
-        display: block;
+        height: 250px;
+    }
+}
+
+/* Accessibility */
+#favourites-list .favourite-card:focus-visible {
+    outline: 3px solid #315b45;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #favourites-list .favourite-card,
+    #favourites-list .favourite-card .hike-image {
+        transition: none;
     }
 }
