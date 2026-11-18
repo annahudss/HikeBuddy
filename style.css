@@ -443,7 +443,7 @@ main {
 
 #favourites-list .favourite-card .hike-image img {
     width: 100%;
-    height: 170px;
+    height: 100% !important;
     object-fit: cover;
     display: block;
 }
@@ -475,6 +475,8 @@ main {
 @media (max-width: 600px) {
     #favourites-list .favourite-card.is-expanded .hike-image {
         width: 100%;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 16 / 9;
+        height: auto !important;
+        display: block;
     }
 }
