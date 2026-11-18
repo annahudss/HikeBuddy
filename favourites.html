@@ -170,13 +170,33 @@
                 });
             }
 
-            window.addEventListener("scroll", updateExpandedCard, {
-                passive: true
-            });
+// Remember the scroll position when opening a hike
+window.addEventListener("beforeunload", function() {
+    sessionStorage.setItem(
+        "favouritesScrollPosition",
+        window.scrollY
+    );
+});
 
-            window.addEventListener("resize", updateExpandedCard);
+// Restore the previous position when returning
+window.addEventListener("pageshow", function() {
+    const savedPosition = sessionStorage.getItem(
+        "favouritesScrollPosition"
+    );
 
-            updateExpandedCard();
+    if (savedPosition !== null) {
+        window.scrollTo(0, Number(savedPosition));
+        updateExpandedCard();
+    }
+});
+
+window.addEventListener("scroll", updateExpandedCard, {
+    passive: true
+});
+
+window.addEventListener("resize", updateExpandedCard);
+
+updateExpandedCard();
 
         }
 
