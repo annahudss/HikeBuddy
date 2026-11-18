@@ -437,3 +437,25 @@ main {
         height: 250px;
     }
 }
+#favourites-list .favourite-card .hike-image {
+    overflow: hidden;
+}
+
+#favourites-list .favourite-card .hike-image img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+}
+
+#favourites-list .favourite-card.is-expanded .hike-image,
+#favourites-list .favourite-card.is-expanded .hike-image img {
+    height: 310px !important;
+}
+
+@media (max-width: 600px) {
+    #favourites-list .favourite-card.is-expanded .hike-image,
+    #favourites-list .favourite-card.is-expanded .hike-image img {
+        height: 250px !important;
+    }
+}
