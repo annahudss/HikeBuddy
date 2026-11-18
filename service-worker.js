@@ -1,5 +1,5 @@
 
-const CACHE_NAME = "hikebuddy-v8";
+const CACHE_NAME = "hikebuddy-v9";
 
 const FILES_TO_CACHE = [
     "index.html",
