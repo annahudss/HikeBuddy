@@ -245,28 +245,20 @@ searchInput.addEventListener("input", filterHikes);
 difficultyFilter.addEventListener("change", filterHikes);
 distanceFilter.addEventListener("change", filterHikes);
         // Remember Explore scroll position when opening a hike
-document.addEventListener("click", function(event) {
-    const hikeLink = event.target.closest('a[href*="hike-details.html"]');
-
-    if (hikeLink) {
-        sessionStorage.setItem(
-            "exploreScrollPosition",
-            window.scrollY
-        );
-    }
+// Save Explore scroll position when opening a hike
+document.querySelectorAll("#hike-list .hike-card").forEach(function(card) {
+    card.addEventListener("click", function() {
+        sessionStorage.setItem("exploreScrollPosition", window.scrollY);
+    });
 });
 
-// Restore scroll position when returning to Explore
+// Restore Explore scroll position when returning
 window.addEventListener("pageshow", function() {
-    const savedPosition = sessionStorage.getItem(
-        "exploreScrollPosition"
-    );
+    const savedPosition = sessionStorage.getItem("exploreScrollPosition");
 
     if (savedPosition !== null) {
-        requestAnimationFrame(function() {
-            window.scrollTo(0, Number(savedPosition));
-            sessionStorage.removeItem("exploreScrollPosition");
-        });
+        window.scrollTo(0, Number(savedPosition));
+        sessionStorage.removeItem("exploreScrollPosition");
     }
 });
     </script>
