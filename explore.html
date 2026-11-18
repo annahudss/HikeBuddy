@@ -244,6 +244,31 @@ function filterHikes() {
 searchInput.addEventListener("input", filterHikes);
 difficultyFilter.addEventListener("change", filterHikes);
 distanceFilter.addEventListener("change", filterHikes);
+        // Remember Explore scroll position when opening a hike
+document.addEventListener("click", function(event) {
+    const hikeLink = event.target.closest('a[href*="hike-details.html"]');
+
+    if (hikeLink) {
+        sessionStorage.setItem(
+            "exploreScrollPosition",
+            window.scrollY
+        );
+    }
+});
+
+// Restore scroll position when returning to Explore
+window.addEventListener("pageshow", function() {
+    const savedPosition = sessionStorage.getItem(
+        "exploreScrollPosition"
+    );
+
+    if (savedPosition !== null) {
+        requestAnimationFrame(function() {
+            window.scrollTo(0, Number(savedPosition));
+            sessionStorage.removeItem("exploreScrollPosition");
+        });
+    }
+});
     </script>
 </body>
 </html>
