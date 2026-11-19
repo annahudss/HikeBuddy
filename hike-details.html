@@ -207,12 +207,6 @@ if (fromPage === "explore") {
         localStorage.setItem("favourites", JSON.stringify(favourites));
     }
     const weatherInfo = document.getElementById("weather-info");
-const hikeCoordinates = {
-        "arthurs-seat": [55.9447, -3.1618],
-        "ben-lomond": [56.2375, -4.6336],
-        "the-hermitage": [56.5658, -3.5850],
-        "loch-an-eilein": [57.1458, -3.5858],
-        "cairn-gorm": [57.11
 
 async function getWeather() {
     if (!selectedHike) {
@@ -221,19 +215,12 @@ async function getWeather() {
 
     weatherInfo.textContent = "Loading weather...";
 
-    const coordinates = hikeCoordinates[hikeId];
-
-    if (!coordinates) {
-        weatherInfo.textContent = "Weather information is currently unavailable.";
-        return;
-    }
-
     try {
-        const [lat, lon] = coordinates;
+        
+const response = await fetch(
+    `https://hikebuddy-weather.teenageranna1302.workers.dev/?city=${encodeURIComponent(selectedHike.city + ",UK")}`
+);
 
-        const response = await fetch(
-            `https://hikebuddy-weather.teenageranna1302.workers.dev/?lat=${lat}&lon=${lon}`
-        );
 
         if (!response.ok) {
             throw new Error("Weather request failed");
@@ -245,13 +232,20 @@ async function getWeather() {
             `${Math.round(weather.main.temp)}°C · ${weather.weather[0].description} · Wind ${Math.round(weather.wind.speed * 3.6)} km/h`;
 
     } catch (error) {
-        console.error("Weather error:", error);
-
         weatherInfo.textContent =
             "Weather information is currently unavailable.";
     }
 }
+
 getWeather();
+const hikeCoordinates = {
+        "arthurs-seat": [55.9447, -3.1618],
+        "ben-lomond": [56.2375, -4.6336],
+        "the-hermitage": [56.5658, -3.5850],
+        "loch-an-eilein": [57.1458, -3.5858],
+        "cairn-gorm": [57.1167, -3.6167]
+    };
+
     const coordinates = hikeCoordinates[hikeId];
 
       let map;
