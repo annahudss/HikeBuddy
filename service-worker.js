@@ -13,7 +13,7 @@ const FILES_TO_CACHE = [
     "images/arthurs-seat.jpg",
     "images/ben-lomond.jpg",
     "images/the-hermitage.jpg",
-    "images/loch-an-eileann.jpg",
+    "images/loch-an-eilein.jpg",
     "images/cairn-gorm.jpg",
     "images/icon-192.png",
     "images/icon-512.png"
