@@ -72,11 +72,12 @@ self.addEventListener("fetch", function(event) {
                     }
                     return response;
                 })
-                .catch(function() {
-                    return caches.match(request).then(function(cached) {
-                        return cached || caches.match("index.html");
-                    });
-                })
+               .catch(function() {
+    const offlineUrl = new URL(request.url);
+    offlineUrl.search = "";
+
+    return caches.match(offlineUrl.href);
+})
         );
         return;
     }
