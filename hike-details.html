@@ -217,17 +217,11 @@ async function getWeather() {
     weatherInfo.textContent = "Loading weather...";
 
     try {
-        const coordinates = hikeCoordinates[hikeId];
+        
+const response = await fetch(
+    `https://hikebuddy-weather.teenageranna1302.workers.dev/?city=${encodeURIComponent(selectedHike.city + ",GB")}`
+);
 
-        if (!coordinates) {
-            throw new Error("Hike coordinates not found");
-        }
-
-        const [lat, lon] = coordinates;
-
-        const response = await fetch(
-            `https://hikebuddy-weather.teenageranna1302.workers.dev/?lat=${lat}&lon=${lon}`
-        );
 
         if (!response.ok) {
             throw new Error("Weather request failed");
@@ -244,9 +238,76 @@ async function getWeather() {
     }
 }
 
+getWeather();
+const hikeCoordinates = {
+        "arthurs-seat": [55.9447, -3.1618],
+        "ben-lomond": [56.2375, -4.6336],
+        "the-hermitage": [56.5658, -3.5850],
+        "loch-an-eilein": [57.1458, -3.5858],
+        "cairn-gorm": [57.1167, -3.6167]
+    };
+
+    const coordinates = hikeCoordinates[hikeId];
+
+      let map;
+
+     if (coordinates) {
+    map = L.map("map").setView(coordinates, 13);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker(coordinates)
+            .addTo(map)
+            .bindPopup(selectedHike.name)
+            .openPopup();
+    }
+document.getElementById("view-map-button").addEventListener("click", function() {
+    const mapElement = document.getElementById("map");
+
+    mapElement.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    if (map) {
+        map.invalidateSize();
+    }
+});
+    function useMyLocation() {
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return;
+    }
+
+    if (!map) {
+        alert("The map is not available.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            map.setView([latitude, longitude], 14);
+
+            L.marker([latitude, longitude])
+                .addTo(map)
+                .bindPopup("You are here")
+                .openPopup();
+        },
+        function() {
+    alert("Location access was unavailable. Please check your browser permissions.");
+}
+    );
+}
+
     </script>
     
     </body>
 </html>
+
 
 
