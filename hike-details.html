@@ -58,9 +58,9 @@
                 </button>
 
 
-                <button class="map-button">
-                    View map
-                </button>
+                <button class="map-button" id="view-map-button" type="button">
+    View map
+</button>
                 
                 <button class="location-button" onclick="useMyLocation()">
                     Use my location
@@ -262,7 +262,18 @@ const hikeCoordinates = {
             .bindPopup(selectedHike.name)
             .openPopup();
     }
+document.getElementById("view-map-button").addEventListener("click", function() {
+    const mapElement = document.getElementById("map");
 
+    mapElement.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    if (map) {
+        map.invalidateSize();
+    }
+});
     function useMyLocation() {
     if (!navigator.geolocation) {
         alert("Geolocation is not supported by your browser.");
@@ -295,3 +306,4 @@ const hikeCoordinates = {
     
     </body>
 </html>
+
