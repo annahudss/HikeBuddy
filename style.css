@@ -161,7 +161,7 @@ main {
 }
 
 .details-image {
-    height: 150px;
+    height: 190px;
     background-color: #c9d5ca;
     display: flex;
     justify-content: center;
@@ -389,3 +389,4 @@ main {
         transition: none;
     }
 }
+
