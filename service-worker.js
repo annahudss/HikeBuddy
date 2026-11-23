@@ -1,5 +1,5 @@
 
-const CACHE_NAME = "hikebuddy-v11";
+const CACHE_NAME = "hikebuddy-v12";
 
 const FILES_TO_CACHE = [
     "./",
@@ -100,4 +100,5 @@ self.addEventListener("fetch", function(event) {
         );
     }
 });
+
 
